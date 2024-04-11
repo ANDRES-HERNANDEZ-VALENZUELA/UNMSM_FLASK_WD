@@ -1,0 +1,28 @@
+from flask import Flask, abort
+
+app = Flask(__name__)
+
+# Función para cargar un usuario
+def load_user(id):
+    # Implementación básica de carga de usuario
+    # Aquí deberías realizar la lógica para cargar el usuario desde tu base de datos o almacenamiento
+    # En esta implementación básica, simplemente retornamos None si el usuario no es encontrado
+    # Esta función debería ser reemplazada por una que se ajuste a tu aplicación
+    if id == '1':
+        return {'name': 'Andres'}
+    else:
+        return None
+
+# Ruta para obtener información de usuario
+@app.route('/user/<id>')
+def get_user(id):
+    user = load_user(id)
+    if not user:
+        abort(404)
+    return '<h1>Hello, %s</h1>' % user['name']
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    
+*Usar esta URL*
+http://localhost:5000/user/1
